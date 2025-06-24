@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.jenkins-ci.plugins</groupId>
 		<artifactId>plugin</artifactId>
-		<version>3.4</version>
+		<version>5.17</version>
 		<relativePath />
 	</parent>
 	<groupId>io.jenkins.plugins</groupId>
@@ -12,10 +12,11 @@
 	<version>0.0.8-SNAPSHOT</version>
 	<packaging>hpi</packaging>
 	<properties>
+		<!-- https://www.jenkins.io/doc/developer/plugin-development/choosing-jenkins-baseline/ -->
+		<jenkins.baseline>2.492</jenkins.baseline>
 		<!-- Baseline Jenkins version you use to build the plugin. Users must have 
 			this version or newer to run. -->
-		<jenkins.version>2.73.3</jenkins.version>
-		<java.level>8</java.level>
+		<jenkins.version>${jenkins.baseline}.3</jenkins.version>
 		<!-- Other properties you may want to use: ~ jenkins-test-harness.version: 
 			Jenkins Test Harness version you use to test the plugin. For Jenkins version 
 			>= 1.580.1 use JTH 2.0 or higher. ~ hpi-plugin.version: The HPI Maven Plugin 
@@ -24,6 +25,17 @@
 	</properties>
 	<name>Xooa</name>
 	<description>Xooa plugin allows user to automatically upgrade a blockchain application deployed on Xooa Platform. It can be added as a build pipeline step. The plugin supports apps deployed on both Hyperledger fabric and Ethereum networks.</description>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>io.jenkins.tools.bom</groupId>
+				<artifactId>bom-${jenkins.baseline}.x</artifactId>
+				<version>4948.vcf1d17350668</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<!-- The default licence for Jenkins OSS Plugins is MIT. Substitute for 
 		the applicable one if needed. -->
 	<licenses>
@@ -33,7 +45,7 @@
 		</license>
 	</licenses>
 	<scm>
-		<connection>scm:git:ssh://github.com/jenkinsci/xooa-plugin.git</connection>
+		<connection>scm:git:https://github.com/jenkinsci/xooa-plugin.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/jenkinsci/xooa-plugin.git</developerConnection>
 		<url>https://github.com/jenkinsci/xooa-plugin</url>
 		<tag>HEAD</tag>
@@ -43,48 +55,40 @@
 		<dependency>
 			<groupId>org.jenkins-ci.plugins</groupId>
 			<artifactId>structs</artifactId>
-			<version>1.7</version>
 		</dependency>
 		<dependency>
 			<groupId>org.jenkins-ci.plugins.workflow</groupId>
 			<artifactId>workflow-step-api</artifactId>
-			<version>2.12</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jenkins-ci.plugins.workflow</groupId>
 			<artifactId>workflow-cps</artifactId>
-			<version>2.39</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jenkins-ci.plugins.workflow</groupId>
 			<artifactId>workflow-job</artifactId>
-			<version>2.11.2</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jenkins-ci.plugins.workflow</groupId>
 			<artifactId>workflow-basic-steps</artifactId>
-			<version>2.6</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jenkins-ci.plugins.workflow</groupId>
 			<artifactId>workflow-durable-task-step</artifactId>
-			<version>2.13</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jenkins-ci.plugins.workflow</groupId>
 			<artifactId>workflow-api</artifactId>
-			<version>2.20</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jenkins-ci.plugins.workflow</groupId>
 			<artifactId>workflow-support</artifactId>
-			<version>2.14</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -114,13 +118,6 @@
 	</dependencies>
 
 	<url>https://wiki.jenkins.io/display/JENKINS/Xooa+Plugin</url>
-	<developers>
-		<developer>
-			<id>vinayxooa</id>
-			<name>Vinay Bagul</name>
-			<email>vinay.bagul@xooa.com</email>
-		</developer>
-	</developers>
 
 
 	<!-- If you want this to appear on the wiki page: <developers> <developer> 
